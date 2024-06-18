@@ -1,3 +1,59 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "plugins": ["react", "react-hooks", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "next",
+        "prettier",
+        "next/core-web-vitals",
+        "eslint-config-prettier",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-type-checked",
+        "plugin:react/jsx-runtime"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module",
+        "requireConfigFile": false,
+        "project": ["./tsconfig.json"]
+      }
+    }
+  ],
+  "settings": { "react": { "version": "detect" } },
+  "ignorePatterns": ["/public/"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "no-var": "error",
+    "no-constant-condition": "error",
+    "no-dupe-args": "error",
+    "no-dupe-else-if": "error",
+    "no-console": ["error", {}],
+    "no-debugger": "error",
+    "no-await-in-loop": "error",
+    "no-duplicate-imports": ["error", { "includeExports": true }],
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "quotes": ["error", "single"],
+    "function-paren-newline": ["error", "multiline-arguments"],
+    "valid-jsdoc": "error",
+    // redux
+    "no-restricted-imports": "off",
+    "@typescript-eslint/no-restricted-imports": [
+      "error",
+      {
+        "name": "react-redux",
+        "importNames": ["useSelector", "useDispatch"],
+        "message": "Use typed hooks `useAppDispatch` and `useAppSelector` instead."
+      },
+      {
+        "name": "next/router",
+        "importNames": ["useRouter", "router"],
+        "message": "Use `useRouter` in `next/navigation`"
+      }
+    ]
+  }
 }
