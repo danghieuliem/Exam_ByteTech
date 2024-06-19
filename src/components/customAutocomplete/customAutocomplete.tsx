@@ -74,23 +74,15 @@ const CustomAutocomplete = <T extends object, K extends object>(
                     return e[select.value] === field.value
                   }),
                 })}
-            renderInput={(params) => {
-              return disabled ? (
-                <TextField
-                  {...params}
-                  size={params.size || 'small'}
-                  label={label}
-                />
-              ) : (
-                <TextField
-                  {...params}
-                  size={params.size || 'small'}
-                  name={name}
-                  label={label}
-                  error={!!fieldState.error}
-                />
-              )
-            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                size={params.size || 'small'}
+                name={name}
+                label={label}
+                error={!!fieldState.error}
+              />
+            )}
             onChange={(event, value, reason, details) => {
               autocompleteProps?.onChange?.(event, value, reason, details)
               isValueTypeObject
