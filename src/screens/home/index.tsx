@@ -1,6 +1,6 @@
 'use client'
 
-import CustomListItem from '@/components/customListItem'
+import { CustomItem } from '@/components/customItem'
 import { Box, Button } from '@mui/material'
 import { DEFAULT_VALUE, useHook } from './hook'
 
@@ -21,7 +21,7 @@ const HomeScreen = () => {
         </Button>
       </Box>
       {fields.map((field, index) => (
-        <CustomListItem
+        <CustomItem
           key={field.id}
           useListDataFrom={useListDataFrom}
           index={index}

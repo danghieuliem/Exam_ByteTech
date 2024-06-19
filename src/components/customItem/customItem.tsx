@@ -24,7 +24,7 @@ type TProps = {
   remove: UseFieldArrayRemove
 }
 
-const CustomListItem = ({ key, useListDataFrom, index, remove }: TProps) => {
+const CustomItem = ({ key, useListDataFrom, index, remove }: TProps) => {
   const { control, watch, setValue } = useListDataFrom
   const [currentDataType, setCurrentDataType] = useState<
     keyof TTransDataType | null
@@ -97,4 +97,4 @@ const CustomListItem = ({ key, useListDataFrom, index, remove }: TProps) => {
   )
 }
 
-export default CustomListItem
+export default CustomItem
