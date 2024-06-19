@@ -12,37 +12,44 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "clean": "rm -rf {packages/*/,}node_modules yarn.lock",
     "reinstall": "yarn clean && yarn install",
-    "export": "NEXT_PUBLIC_IS_EXPORT=true yarn build ",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
-    "prepare": "husky install",
-    "compile": "graphql-codegen",
-    "watch": "graphql-codegen -w"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx,js,jsx}\"",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,scss,md}": "prettier --write",
-    "*.{js,jsx,ts,tsx}": "eslint --fix"
+    "*.{js,jsx,ts,tsx,json,css,scss,md}": "yarn prettier --write",
+    "*.{js,jsx,ts,tsx}": "yarn lint --fix"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.20",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@mui/x-date-pickers-pro": "^6.19.5",
+    "@types/lodash": "^4.17.5",
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-typescript": "^0.14.0",
-    "husky": "^9.0.11",
+    "husky": "^8.0.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.4"
+    "react-hook-form": "^7.52.0",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
     "postcss": "^8",
     "prettier": "3.3.2",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "typescript": "^5"
   }
 }
