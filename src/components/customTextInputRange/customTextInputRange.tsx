@@ -3,12 +3,14 @@ import { Controller, FieldValues, UseControllerProps } from 'react-hook-form'
 
 type TProps<T extends FieldValues> = TextFieldProps &
   UseControllerProps<T> & {
+    onChange?: (newValue: string[]) => void
     ref?: React.Ref<HTMLInputElement>
     typeValue?: 'string' | 'number'
   }
 
 const CustomTextInputRange = <T extends object>(props: TProps<T>) => {
   const {
+    onChange,
     fullWidth = true,
     name,
     rules,
@@ -49,38 +51,42 @@ const CustomTextInputRange = <T extends object>(props: TProps<T>) => {
           }
           return (
             <Box>
-              <Box className='flex'>
+              <Box className='flex gap-2'>
                 <TextField
                   {...inputProp}
-                  label={'from'}
+                  label={'Value 1'}
                   value={value?.[0] ?? ''}
                   onChange={(e) => {
                     const newVal = [...value]
                     if (other.typeValue !== 'number') {
                       newVal[0] = e.target.value
+                      onChange?.(newVal)
                       return field.onChange(newVal)
                     }
                     newVal[0] = {
                       ...e,
                       target: { ...e.target, value: Number(e.target.value) },
                     } as never
+                    onChange?.(newVal)
                     field.onChange(newVal)
                   }}
                 />
                 <TextField
                   {...inputProp}
-                  label={'to'}
+                  label={'Value 2'}
                   value={value?.[1] ?? ''}
                   onChange={(e) => {
                     const newVal = [...value]
                     if (other.typeValue !== 'number') {
                       newVal[1] = e.target.value
+                      onChange?.(newVal)
                       return field.onChange(newVal)
                     }
                     newVal[1] = {
                       ...e,
                       target: { ...e.target, value: Number(e.target.value) },
                     } as never
+                    onChange?.(newVal)
                     field.onChange(newVal)
                   }}
                 />

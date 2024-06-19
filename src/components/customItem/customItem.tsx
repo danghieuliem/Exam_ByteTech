@@ -93,7 +93,7 @@ const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
         <FieldValues
           control={control}
           fieldDataType={currentDataType ?? null}
-          index={index}
+          name={`listData.${index}.value`}
           operator={watch(`listData.${index}.operators`) ?? null}
           disabled={!watch(`listData.${index}.operators`)}
         />

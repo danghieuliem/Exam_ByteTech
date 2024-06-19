@@ -1,8 +1,8 @@
-import { TListItem, TTransDataType } from '@/types'
+import { TTransDataType } from '@/types'
 import { Box } from '@mui/material'
 import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField'
 import { useMemo } from 'react'
-import { Control } from 'react-hook-form'
+import { Control, UseControllerProps } from 'react-hook-form'
 import { CustomDateTimePicker } from '../customDateTimePicker'
 import { CustomDateTimeRangePicker } from '../customDateTimeRangePicker'
 import { CustomTextInput } from '../customTextInput'
@@ -10,23 +10,23 @@ import { TCustomTextInputProps } from '../customTextInput/customTextInput'
 import { CustomTextInputMultiple } from '../customTextInputMultiple'
 import { CustomTextInputRange } from '../customTextInputRange'
 
-type TProp = {
+type TProp<T extends object> = {
   key?: React.Key
+  name: UseControllerProps<T>['name']
   classNames?: string
   fieldDataType: keyof TTransDataType | null
   operator: TTransDataType[keyof TTransDataType] | null
-  control: Control<TListItem>
-  index: number
+  control: Control<T>
   disabled?: boolean
 }
 
-const FieldValues = (props: TProp) => {
-  const { classNames, fieldDataType, operator, control, index, disabled, key } =
+const FieldValues = <T extends object>(props: TProp<T>) => {
+  const { name, classNames, fieldDataType, operator, control, disabled, key } =
     props
 
   const listOperator = useMemo(() => {
-    const inputProp: TCustomTextInputProps<TListItem> = {
-      name: `listData.${index}.value`,
+    const inputProp: TCustomTextInputProps<T> = {
+      name,
       control: control,
       label: 'value',
       required: true,
@@ -39,7 +39,7 @@ const FieldValues = (props: TProp) => {
     switch (fieldDataType) {
       case 'String':
         if (
-          ['Equals', 'notEquals', 'likes', 'notLike', 'containAll'].includes(
+          ['equals', 'notEquals', 'likes', 'notLikes', 'containAll'].includes(
             operator as string,
           )
         ) {
@@ -47,7 +47,7 @@ const FieldValues = (props: TProp) => {
             <CustomTextInputMultiple
               disabled={disabled}
               rules={{ required: true }}
-              name={`listData.${index}.value`}
+              name={name}
               control={control}
               label={'value'}
             />
@@ -62,7 +62,7 @@ const FieldValues = (props: TProp) => {
             <CustomTextInputRange
               disabled={disabled}
               required={true}
-              name={`listData.${index}.value`}
+              name={name}
               control={control}
               label='value'
               type='number'
@@ -76,7 +76,7 @@ const FieldValues = (props: TProp) => {
             <CustomDateTimeRangePicker
               disabled={disabled}
               rules={{ required: true }}
-              name={`listData.${index}.value`}
+              name={name}
               control={control}
               slots={{ field: SingleInputDateRangeField }}
               label={'value'}
@@ -86,7 +86,7 @@ const FieldValues = (props: TProp) => {
           <CustomDateTimePicker
             disabled={disabled}
             rules={{ required: true }}
-            name={`listData.${index}.value`}
+            name={name}
             control={control}
             label={'value'}
           />
@@ -95,7 +95,7 @@ const FieldValues = (props: TProp) => {
       default:
         return <CustomTextInput {...inputProp} type='text' />
     }
-  }, [control, disabled, fieldDataType, index, operator])
+  }, [control, disabled, fieldDataType, name, operator])
 
   return (
     <Box

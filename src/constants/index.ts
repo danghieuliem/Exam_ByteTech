@@ -8,6 +8,8 @@ export const OPERATORS = {
     likes: 'Likes',
     notLikes: 'Not Likes',
     containAll: 'Contains All',
+    exist: 'Exist',
+    wildcard: 'Wildcard',
   },
   number: {
     equals: 'Equals',
