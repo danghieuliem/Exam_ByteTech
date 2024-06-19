@@ -58,10 +58,13 @@ const CustomTextInputMultiple = <T extends object>(props: TProps<T>) => {
             filterOptions={(options, params) => {
               const filtered = filter(options, params as never)
               const { inputValue } = params
-              const isExisting = options.some((option) => inputValue === option)
+              const inputValueTrimmed = inputValue.trim()
+              const isExisting = options.some(
+                (option) => inputValueTrimmed === option,
+              )
 
-              if (inputValue !== '' && !isExisting) {
-                filtered.push(inputValue)
+              if (inputValueTrimmed.trim() !== '' && !isExisting) {
+                filtered.push(inputValueTrimmed)
               }
 
               return filtered
