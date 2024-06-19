@@ -2,6 +2,7 @@
 
 import { CustomItem } from '@/components/customItem'
 import { Box, Button } from '@mui/material'
+import { Fragment } from 'react'
 import { DEFAULT_VALUE, useHook } from './hook'
 
 const HomeScreen = () => {
@@ -21,12 +22,13 @@ const HomeScreen = () => {
         </Button>
       </Box>
       {fields.map((field, index) => (
-        <CustomItem
-          key={field.id}
-          useListDataFrom={useListDataFrom}
-          index={index}
-          remove={remove}
-        />
+        <Fragment key={field.id}>
+          <CustomItem
+            useListDataFrom={useListDataFrom}
+            index={index}
+            remove={remove}
+          />
+        </Fragment>
       ))}
     </Box>
   )

@@ -9,18 +9,20 @@ export type TCustomTextInputProps<T extends FieldValues> = TextFieldProps &
     typeValue?: 'string' | 'number'
   }
 
-const CustomTextInput = <T extends object>({
-  typeValue = 'string',
-  name,
-  control,
-  rules,
-  disabled,
-  shouldUnregister,
-  defaultValue,
-  required,
-  ref,
-  ...other
-}: TCustomTextInputProps<T>) => {
+const CustomTextInput = <T extends object>(props: TCustomTextInputProps<T>) => {
+  const {
+    typeValue = 'string',
+    name,
+    control,
+    rules,
+    disabled,
+    shouldUnregister,
+    defaultValue,
+    required,
+    ref,
+    ...other
+  } = props
+
   const { field, fieldState } = useController({
     name,
     control,

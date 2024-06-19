@@ -16,7 +16,6 @@ export const transDataType: TObjectTransDataType = {
 }
 
 type TProps = {
-  key: string
   useListDataFrom: UseFormReturn<{
     listData: TItem[]
   }>
@@ -24,7 +23,7 @@ type TProps = {
   remove: UseFieldArrayRemove
 }
 
-const CustomItem = ({ key, useListDataFrom, index, remove }: TProps) => {
+const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
   const { control, watch, setValue } = useListDataFrom
   const [currentDataType, setCurrentDataType] = useState<
     keyof TTransDataType | null
@@ -40,7 +39,7 @@ const CustomItem = ({ key, useListDataFrom, index, remove }: TProps) => {
   }, [currentDataType])
 
   return (
-    <Box key={key} className='flex w-full items-center gap-x-4'>
+    <Box className='flex w-full items-center gap-x-4'>
       <Box className='grid grid-cols-3 w-11/12 gap-4'>
         <CustomAutocomplete
           isValueTypeObject={true}
