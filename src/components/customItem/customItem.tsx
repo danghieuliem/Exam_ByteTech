@@ -85,10 +85,8 @@ const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
             label: 'name',
             value: 'key',
           }}
-          onChange={(val) => {
-            if (!val) {
-              setValue(`listData.${index}.value`, null)
-            }
+          onChange={() => {
+            setValue(`listData.${index}.value`, null)
           }}
           disabled={!watch(`listData.${index}.field`)}
         />
