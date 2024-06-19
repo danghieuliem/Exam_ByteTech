@@ -8,7 +8,7 @@ import { DEFAULT_VALUE, useHook } from './hook'
 const HomeScreen = () => {
   const { onSubmit, fields, append, remove, useListDataFrom } = useHook()
   return (
-    <Box className='text-3xl w-[800px] bg-white p-6 space-y-4 rounded-lg'>
+    <Box className='text-3xl w-[1000px] bg-white p-6 space-y-4 rounded-lg'>
       <Box className='flex gap-4 '>
         <Button
           color='primary'

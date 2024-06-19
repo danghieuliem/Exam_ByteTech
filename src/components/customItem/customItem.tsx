@@ -4,8 +4,10 @@ import { CustomAutocomplete } from '@/components/customAutocomplete'
 import { MOCK_DATA, OPERATORS } from '@/constants'
 import { TField, TItem, TObjectTransDataType, TTransDataType } from '@/types'
 import { Box, Button } from '@mui/material'
+import { isString } from 'lodash'
 import { useMemo, useState } from 'react'
 import { UseFieldArrayRemove, UseFormReturn } from 'react-hook-form'
+import { DeleteOutlineIcon } from '../icons'
 import FieldValues from './fieldValue'
 
 export const transDataType: TObjectTransDataType = {
@@ -43,6 +45,10 @@ const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
       <Box className='grid grid-cols-3 w-11/12 gap-4'>
         <CustomAutocomplete
           isValueTypeObject={true}
+          getOptionLabel={(option) => {
+            if (isString(option)) return option
+            return `${option.name} - ${option.dataType}`
+          }}
           fullWidth
           control={control}
           options={MOCK_DATA}
@@ -64,6 +70,7 @@ const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
           }}
         />
         <CustomAutocomplete
+          key={watch(`listData.${index}.operators`)}
           fullWidth
           control={control}
           options={listOperator}
@@ -90,7 +97,7 @@ const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
         />
       </Box>
       <Button color='error' variant='contained' onClick={() => remove(index)}>
-        Delete
+        <DeleteOutlineIcon />
       </Button>
     </Box>
   )
