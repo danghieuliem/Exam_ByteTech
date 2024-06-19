@@ -11,6 +11,7 @@ import { CustomTextInputMultiple } from '../customTextInputMultiple'
 import { CustomTextInputRange } from '../customTextInputRange'
 
 type TProp = {
+  classNames?: string
   fieldDataType: keyof TTransDataType | null
   operator: TTransDataType[keyof TTransDataType] | null
   control: Control<TListItem>
@@ -18,13 +19,10 @@ type TProp = {
   disabled?: boolean
 }
 
-const FieldValues = ({
-  fieldDataType,
-  operator,
-  control,
-  index,
-  disabled,
-}: TProp) => {
+const FieldValues = (props: TProp) => {
+  const { classNames, fieldDataType, operator, control, index, disabled } =
+    props
+
   const listOperator = useMemo(() => {
     const inputProp: TCustomTextInputProps<TListItem> = {
       name: `listData.${index}.value`,
@@ -99,7 +97,9 @@ const FieldValues = ({
   }, [control, disabled, fieldDataType, index, operator])
 
   return (
-    <Box className='h-full flex flex-col justify-center'>{listOperator}</Box>
+    <Box className={'h-full flex flex-col justify-center ' + classNames}>
+      {listOperator}
+    </Box>
   )
 }
 

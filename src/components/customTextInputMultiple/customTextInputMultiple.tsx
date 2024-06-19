@@ -72,7 +72,11 @@ const CustomTextInputMultiple = <T extends object>(props: TProps<T>) => {
             renderTags={(tagValue, getTagProps) => {
               return tagValue.map((option, index) => (
                 <Fragment key={index}>
-                  <Chip {...getTagProps({ index })} label={option} />
+                  <Chip
+                    {...getTagProps({ index })}
+                    className='bg-primary-200'
+                    label={option}
+                  />
                 </Fragment>
               ))
             }}

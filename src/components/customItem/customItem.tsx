@@ -3,11 +3,11 @@
 import { CustomAutocomplete } from '@/components/customAutocomplete'
 import { MOCK_DATA, OPERATORS } from '@/constants'
 import { TField, TItem, TObjectTransDataType, TTransDataType } from '@/types'
-import { Box, Button } from '@mui/material'
+import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import { isString } from 'lodash'
 import { useMemo, useState } from 'react'
 import { UseFieldArrayRemove, UseFormReturn } from 'react-hook-form'
-import { DeleteOutlineIcon } from '../icons'
+import { IconDeleteOutlineIcon } from '../icons'
 import FieldValues from './fieldValue'
 
 export const transDataType: TObjectTransDataType = {
@@ -41,9 +41,13 @@ const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
   }, [currentDataType])
 
   return (
-    <Box className='flex w-full items-center gap-x-4'>
-      <Box className='grid grid-cols-3 w-11/12 gap-4'>
+    <Box className='flex w-full items-center gap-x-4 justify-between'>
+      <Tooltip title='Index'>
+        <Typography className='text-primary font'>{index + 1}.</Typography>
+      </Tooltip>
+      <Box className='grid grid-cols-3 w-11/12 gap-4 items-center'>
         <CustomAutocomplete
+          autoFocus
           isValueTypeObject={true}
           getOptionLabel={(option) => {
             if (isString(option)) return option
@@ -96,9 +100,11 @@ const CustomItem = ({ useListDataFrom, index, remove }: TProps) => {
           disabled={!watch(`listData.${index}.operators`)}
         />
       </Box>
-      <Button color='error' variant='contained' onClick={() => remove(index)}>
-        <DeleteOutlineIcon />
-      </Button>
+      <Tooltip title='Delete'>
+        <IconButton className='text-primary' onClick={() => remove(index)}>
+          <IconDeleteOutlineIcon />
+        </IconButton>
+      </Tooltip>
     </Box>
   )
 }
