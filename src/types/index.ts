@@ -1,8 +1,6 @@
 import { OPERATORS } from '@/constants'
 import { Moment } from 'moment'
 
-export type TDataType = 'String' | 'Double' | 'Long' | 'Timestamp'
-
 export type TOperators = typeof OPERATORS
 
 export type TTransDataType = {
