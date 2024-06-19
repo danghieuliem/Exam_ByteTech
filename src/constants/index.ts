@@ -1,4 +1,4 @@
-import { TField } from '@/components/customListItem'
+import { TField } from '@/types'
 
 export const OPERATORS = {
   bool: { equals: 'Equals', notEquals: 'Not Equals' },

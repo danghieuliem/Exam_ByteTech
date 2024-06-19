@@ -1,6 +1,6 @@
-import { TItem } from '@/components/customListItem'
+import { TItem, TListItem } from '@/types'
 import { isArray } from 'lodash'
-import { isMoment, Moment } from 'moment'
+import { Moment, isMoment } from 'moment'
 import { useCallback } from 'react'
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 
@@ -11,7 +11,7 @@ export const DEFAULT_VALUE: TItem = {
 }
 
 export const useHook = () => {
-  const useListDataFrom = useForm<{ listData: TItem[] }>({
+  const useListDataFrom = useForm<TListItem>({
     defaultValues: {
       listData: [{ ...DEFAULT_VALUE }],
     },

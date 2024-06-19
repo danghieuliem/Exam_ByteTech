@@ -2,45 +2,11 @@
 
 import { CustomAutocomplete } from '@/components/customAutocomplete'
 import { MOCK_DATA, OPERATORS } from '@/constants'
+import { TField, TItem, TObjectTransDataType, TTransDataType } from '@/types'
 import { Box, Button } from '@mui/material'
-import { Moment } from 'moment'
 import { useMemo, useState } from 'react'
 import { UseFieldArrayRemove, UseFormReturn } from 'react-hook-form'
 import FieldValues from './fieldValue'
-
-export type TDataType = 'String' | 'Double' | 'Long' | 'Timestamp'
-
-export type TOperators = typeof OPERATORS
-
-export type TTransDataType = {
-  String: keyof TOperators['text']
-  Double: keyof TOperators['number']
-  Long: keyof TOperators['number']
-  Timestamp: keyof TOperators['time']
-  // [key in keyof TObjectTransDataType]: TObjectTransDataType[keyof TObjectTransDataType]
-}
-
-export type TField = {
-  key: string
-  sysIndexKey: string
-  name: string
-  dataType: keyof TTransDataType
-  refType: string | null
-  ctxMasterDataRef: string | null
-}
-
-export type TItem = {
-  field: TField | null
-  operators: TTransDataType[keyof TTransDataType] | null
-  value: string | string[] | [Moment, Moment] | null
-}
-
-export type TObjectTransDataType = {
-  String: TOperators['text']
-  Double: TOperators['number']
-  Long: TOperators['number']
-  Timestamp: TOperators['time']
-}
 
 export const transDataType: TObjectTransDataType = {
   String: OPERATORS.text,

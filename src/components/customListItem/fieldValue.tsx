@@ -1,8 +1,8 @@
+import { TListItem, TTransDataType } from '@/types'
 import { Box } from '@mui/material'
 import { SingleInputDateRangeField } from '@mui/x-date-pickers-pro/SingleInputDateRangeField'
 import { useMemo } from 'react'
 import { Control } from 'react-hook-form'
-import { TItem, TTransDataType } from '.'
 import { CustomDateTimePicker } from '../customDateTimePicker'
 import { CustomDateTimeRangePicker } from '../customDateTimeRangePicker'
 import { CustomTextInput } from '../customTextInput'
@@ -13,7 +13,7 @@ import { CustomTextInputRange } from '../customTextInputRange'
 type TProp = {
   fieldDataType: keyof TTransDataType | null
   operator: TTransDataType[keyof TTransDataType] | null
-  control: Control<{ listData: TItem[] }>
+  control: Control<TListItem>
   index: number
   disabled?: boolean
 }
@@ -26,7 +26,7 @@ const FieldValues = ({
   disabled,
 }: TProp) => {
   const listOperator = useMemo(() => {
-    const inputProp: TCustomTextInputProps<{ listData: TItem[] }> = {
+    const inputProp: TCustomTextInputProps<TListItem> = {
       name: `listData.${index}.value`,
       control: control,
       label: 'value',
